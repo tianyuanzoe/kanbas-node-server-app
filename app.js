@@ -11,9 +11,12 @@ import UserRoutes from "./users/routes.js";
 import session from "express-session";
 // const express = require('express');
 const app = express();
+const NETIFLY_URL = 'https://a6--scintillating-swan-0fcab7.netlify.app';
+const FRONTEND_URL = NETIFLY_URL || 'http://localhost:3000';
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas';
 mongoose.connect(CONNECTION_STRING);
-app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
+console.log("Connected to MongoDB" + CONNECTION_STRING);
+app.use(cors({credentials: true, origin:FRONTEND_URL}));
 const sessionOptions = {
     secret: "any string",
     resave: false,
